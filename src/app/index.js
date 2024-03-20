@@ -21,13 +21,16 @@ app.get("/health", (_req, res) => {
 });
 
 // Not Found Handler
-app.use((_req, res) => {
+app.use((req, res) => {
+
   const error = CustomError.notFound({
     message: "Resource Not Found",
     errors: ["The requested resource does not exist"],
     hints: "Please check the URL and try again",
   });
-  res.status(error.status).json(error);
+  res
+    .status(error.status)
+    .json({ ...error, status: undefined,trace_id: req.headers["x-trace-id"] });
 });
 
 // Global Error Handler

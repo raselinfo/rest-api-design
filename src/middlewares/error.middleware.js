@@ -1,6 +1,8 @@
 const { ValidationError } = require("joi");
 const CustomError = require("../utils/Error");
 const errorMiddleware = (err, req, res, next) => {
+  console.log("Error Middleware");
+
   const errorMessage =
     process.env.NODE_ENV === "development"
       ? err.message
