@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <section id="product_wrapper">
+
+        <div>
+            <h2>Products</h2>
+            <div id="product_list"></div>
+        </div>
+
+    </section>
+
+    <script>
+        const product_list = document.querySelector('#product_list');
+        const product_details = document.querySelector("#product_details")
+        const etag = localStorage.getItem("etag")
+
+
+        const getProducts = () => {
+            fetch(`http://localhost:4000/api/v1/products?sort=name&order=asc&page=4&limit=10&fields=name,price`)
+                .then(res => {
+                    console.log('Cache-Control headers', res.headers.get('Cache-Control'))
+                    return res.json();
+                })
+                .then(data => {
+                    data?.data?.forEach(product => {
+                        // Add an event listener to each product
+                        const productElement = document.createElement('div');
+                        productElement.innerHTML = `${product.name} - ${product.price}`;
+                        productElement.className = "product"
+                        productElement.addEventListener('click', () => {
+                            // Redirect to product.html with product ID
+                            window.location.href = `product.html?id=${product.id}`;
+                        });
+                        product_list.appendChild(productElement);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching products:', error);
+                });
+        }
+
+        getProducts();
+
+
+
+
+    </script>
+</body>
+
+</html>

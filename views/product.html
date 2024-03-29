@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div id="product_details">
+
+    </div>
+
+    <script>
+        const getSingleProduct = async (productId) => {
+            const headers = {
+                ...(etag && { "If-None-Match": etag })
+            }
+
+            const response = await fetch(`http://localhost:4000/api/v1/products/${productId}`, {
+                headers: headers
+            })
+
+            if (response.status === 304) {
+                return response.json()
+            }
+
+            const data = await response.json()
+            console.log(data)
+
+
+            localStorage.setItem("etag", response.headers.get("Etag"))
+
+            product_details.innerHTML = `<h2>${data.data.name}</h2>
+                    <p>Price: ${data.data.price}</p>
+                    <p>Description: ${data.data.description}</p>
+                    <span>Status:  ${data.data.status} </span>`
+        }
+    </script>
+</body>
+
+</html>
