@@ -343,434 +343,6 @@
 			]
 		},
 		{
-			"name": "Update [id] or Create  Product",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							"const codes=[200,201,400,401,404,500]",
-							"const code=codes[Math.floor(Math.random()*codes.length)]",
-							"pm.variables.set(\"random_code\",code)",
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "PUT",
-				"header": [
-					{
-						"name": "cache-control",
-						"sortOrder": 2,
-						"infoTitle": "We recommend using this header",
-						"info": "Postman added \"Cache-Control: no-cache\" as a precautionary measure to prevent the server from returning stale response when one makes repeated requests.\n\nYou can remove this header in the app settings or enter a new one with a different value.",
-						"allowedToToggle": false,
-						"disableEdit": true,
-						"previewSettingsLink": "Go to settings",
-						"key": "Cache-Control",
-						"value": "no-cache",
-						"system": true,
-						"type": "text"
-					},
-					{
-						"name": "postman-token",
-						"sortOrder": 3,
-						"infoTitle": "We recommend using this header",
-						"info": "The Postman-Token header appends a random UUID to every outgoing request. Postman adds this header for API developers to better debug requests sent and to ensure separate requests appear distinct to the receiving server.\n\nYou can remove this header in the app settings.",
-						"allowedToToggle": false,
-						"disableEdit": true,
-						"previewSettingsLink": "Go to settings",
-						"key": "Postman-Token",
-						"value": "<calculated when request is sent>",
-						"system": true,
-						"type": "text"
-					},
-					{
-						"name": "content-type",
-						"sortOrder": 4,
-						"infoTitle": "This header was automatically added",
-						"info": "The Content-Type header is added to help the server identify the media type of the request body that is present in this request.\n\nUse the request body tab to control the value or to remove this header.",
-						"allowedToToggle": true,
-						"disableEdit": true,
-						"previewSettingsLink": "Go to body",
-						"key": "Content-Type",
-						"value": "application/json",
-						"system": true,
-						"type": "text"
-					},
-					{
-						"name": "content-length",
-						"sortOrder": 5,
-						"infoTitle": "This header was automatically added",
-						"info": "The Content-Length header was added to indicate to the server the size of the request body that is added to this request. Server uses this value to parse the request body accurately.\n\nYou can remove the header or enter a new one with a different value.",
-						"allowedToToggle": true,
-						"disableEdit": true,
-						"previewSettingsLink": "Go to body",
-						"key": "Content-Length",
-						"value": "<calculated when request is sent>",
-						"system": true,
-						"type": "text"
-					},
-					{
-						"name": "host",
-						"sortOrder": 6,
-						"infoTitle": "We recommend using this header",
-						"info": "The Host header is added to identify the domain name for which a request is being sent to the server. This header is implicitly sent by every HTTP client.\n\nYou can remove the header or enter a new one with a different value. It is most likely that without this header, your request will return an HTTP 400 error.",
-						"allowedToToggle": true,
-						"disableEdit": true,
-						"key": "Host",
-						"value": "<calculated when request is sent>",
-						"system": true,
-						"type": "text"
-					},
-					{
-						"name": "user-agent",
-						"sortOrder": 7,
-						"infoTitle": "We recommend using this header",
-						"info": "The User-Agent header is added to help the server identify Postman as the HTTP requesting application or client.\n\nIt is recommended that this header be sent, but you can remove the header or enter a new one with a different value.",
-						"allowedToToggle": true,
-						"disableEdit": true,
-						"key": "User-Agent",
-						"value": "PostmanRuntime/7.32.1",
-						"system": true,
-						"type": "text"
-					},
-					{
-						"name": "accept",
-						"sortOrder": 8,
-						"infoTitle": "We recommend using this header",
-						"info": "The \"Accept: */*\" header is added to tell the server that Postman can understand and process all forms of response content types.\n\nIt is recommended that this header be sent, but you can remove the header or enter a new one with a different value.",
-						"allowedToToggle": true,
-						"disableEdit": true,
-						"key": "Accept",
-						"value": "*/*",
-						"system": true,
-						"type": "text"
-					},
-					{
-						"name": "accept-encoding",
-						"sortOrder": 9,
-						"infoTitle": "We recommend using this header",
-						"info": "The Accept-Encoding header is added to indicate to the server that Postman HTTP client supports a defined list of content-encoding or compression algorithms as response.\n\nYou can remove the header or enter a new one with a different value. Doing that may not accurately render the response within the app.",
-						"allowedToToggle": true,
-						"disableEdit": true,
-						"key": "Accept-Encoding",
-						"value": "gzip, deflate, br",
-						"system": true,
-						"type": "text"
-					},
-					{
-						"name": "connection",
-						"sortOrder": 10,
-						"infoTitle": "We recommend using this header",
-						"info": "Postman added the Connection header to indicate the server to keep the underlying network connection open once the current response is received. This allows Postman to reuse the same connection for faster response times in subsequent requests to the same server.\n\nYou can remove this header or enter a new one with a different value, such as `Connection: Close` to control this behaviour.",
-						"allowedToToggle": true,
-						"disableEdit": true,
-						"key": "Connection",
-						"value": "keep-alive",
-						"system": true,
-						"type": "text"
-					},
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-						"type": "text",
-						"id": 0,
-						"disabled": true
-					},
-					{
-						"key": "x-mock-response-code",
-						"value": "{{random_code}}",
-						"type": "text",
-						"id": 1,
-						"disabled": true
-					},
-					{
-						"key": "x-mock-response-code",
-						"value": "404",
-						"type": "text",
-						"id": 2,
-						"disabled": true
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\": \"Smartphoneggggggg\",\n    \"description\": \"Description of the productggggg\",\n    \"price\": 50,\n    \"status\": \"DRAFT\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{base_url}}/products/:product_id",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"products",
-						":product_id"
-					],
-					"variable": [
-						{
-							"key": "product_id",
-							"value": "{{product_id}}"
-						}
-					]
-				}
-			},
-			"response": [
-				{
-					"name": "200 OK",
-					"originalRequest": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"Smartphone\",\n    \"description\": \"Description of the product\",\n    \"price\": 49.99,\n    \"sku\": \"SMRTPHONE-05\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}/products",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"products"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Content-Type",
-							"value": "application/json",
-							"name": "Content-Type",
-							"description": "",
-							"type": "text"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"message\": \"Product Updated Successfully\",\n    \"data\": {\n        \"id\": 123,\n        \"name\": \"Smartphone\",\n        \"description\": \"Description of the product.\",\n        \"price\": 49.99,\n        \"sku\": \"PRODUCT-05\",\n        \"links\": {\n            \"self\": \"/products\",\n            \"get_product\": \"/products/123\",\n            \"add_to_cart\": \"/addtocart\"\n        }\n    },\n    \"trace_id\": \"23463426346\"\n}"
-				},
-				{
-					"name": "201 Create Product",
-					"originalRequest": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"Smartphone\",\n    \"description\": \"Description of the product\",\n    \"price\": 49.99,\n    \"sku\": \"SMRTPHONE-05\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}/products",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"products"
-							]
-						}
-					},
-					"status": "Created",
-					"code": 201,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Content-Type",
-							"value": "application/json",
-							"name": "Content-Type",
-							"description": "",
-							"type": "text"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"message\": \"Product Created Successfully\",\n    \"data\": {\n        \"id\": 123,\n        \"name\": \"Smartphone\",\n        \"description\": \"Description of the product.\",\n        \"price\": 49.99,\n        \"sku\": \"PRODUCT-05\",\n        \"links\": {\n            \"self\": \"/products/123\",\n            \"get_product\": \"/products/123\"\n        }\n    },\n    \"trace_id\": \"23463426346\"\n}"
-				},
-				{
-					"name": "401 Unauthorized",
-					"originalRequest": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"Smartphone\",\n    \"description\": \"Description of the product\",\n    \"price\": 49.99,\n    \"sku\": \"SMRTPHONE-05\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}/products",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"products"
-							]
-						}
-					},
-					"status": "Unauthorized",
-					"code": 401,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Content-Type",
-							"value": "application/json",
-							"name": "Content-Type",
-							"description": "",
-							"type": "text"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"message\": \"Access Denied\",\n    \"errors\": [],\n    \"hints\": \"Please send the access token in the header as a Bearer Token. If the problem is not resolved, please feel free to contact our technical team\",\n    \"trace_id\": \"23463426346\"\n}"
-				},
-				{
-					"name": "400 Bad Request",
-					"originalRequest": {
-						"method": "PUT",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/products",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"products"
-							]
-						}
-					},
-					"status": "Bad Request",
-					"code": 400,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Content-Type",
-							"value": "application/json",
-							"name": "Content-Type",
-							"description": "",
-							"type": "text"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"message\": \"Validation Error\",\n    \"errors\": [\n        {\n            \"field\": \"name\",\n            \"message\": \"Name is required\"\n        },\n        {\n            \"field\": \"description\",\n            \"message\": \"Description is required\"\n        },\n        {\n            \"field\": \"price\",\n            \"message\": \"Price is required\"\n        },\n        {\n            \"field\": \"sku\",\n            \"message\": \"SKU is required\"\n        }\n    ],\n    \"hints\": \"Please send all the required payload. If the problem is not resolved, please feel free to contact our technical team\",\n    \"trace_id\": \"23463426346\"\n}"
-				},
-				{
-					"name": "500 Internal Server Error",
-					"originalRequest": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"Smartphone\",\n    \"description\": \"Description of the product\",\n    \"price\": 49.99,\n    \"sku\": \"SMRTPHONE-05\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}/products",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"products"
-							]
-						}
-					},
-					"status": "Internal Server Error",
-					"code": 500,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Content-Type",
-							"value": "application/json",
-							"name": "Content-Type",
-							"description": "",
-							"type": "text"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"message\": \"Internal Server Error\",\n    \"errors\": [],\n    \"hints\": \"This is the server-related issue, please feel free to contact our technical team\",\n    \"trace_id\": \"23463426346\"\n}"
-				},
-				{
-					"name": "404 Not Found",
-					"originalRequest": {
-						"method": "PUT",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/products/:product_id",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"products",
-								":product_id"
-							],
-							"variable": [
-								{
-									"key": "product_id",
-									"value": "111"
-								}
-							]
-						}
-					},
-					"status": "Not Found",
-					"code": 404,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Content-Type",
-							"value": "application/json",
-							"name": "Content-Type",
-							"description": "",
-							"type": "text"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"message\": \"Product Not Found\",\n    \"errors\": [],\n    \"hints\": \"The product with ID 111 is currently unavailable. If the problem is not resolved, please feel free to contact our technical team\",\n    \"trace_id\": \"23463426346\"\n}"
-				}
-			]
-		},
-		{
 			"name": "Update product [id]",
 			"event": [
 				{
@@ -1281,7 +853,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{base_url}}/products?sort=name&order=asc&page=4&limit=10&fields=name,price",
+					"raw": "{{base_url}}/products?sort=name&order=desc&page=1&limit=5&fields=name,price,status",
 					"host": [
 						"{{base_url}}"
 					],
@@ -1295,19 +867,248 @@
 						},
 						{
 							"key": "order",
-							"value": "asc"
+							"value": "desc"
 						},
 						{
 							"key": "page",
-							"value": "4"
+							"value": "1"
 						},
 						{
 							"key": "limit",
-							"value": "10"
+							"value": "5"
 						},
 						{
 							"key": "fields",
-							"value": "name,price"
+							"value": "name,price,status"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 OK",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/products?priceMin=50&priceMax=100&sort=price&order=asc&page=2&limit=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "priceMin",
+									"value": "50"
+								},
+								{
+									"key": "priceMax",
+									"value": "100"
+								},
+								{
+									"key": "sort",
+									"value": "price"
+								},
+								{
+									"key": "order",
+									"value": "asc"
+								},
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Product Retrieval Successful\",\n    \"data\": [\n        {\n            \"id\": \"494e93d6-a1ff-45a7-bd55-20f18812dbde\",\n            \"name\": \"Smartphone\",\n            \"price\": 49.99,\n            \"links\": {\n                \"self\": \"/products/494e93d6-a1ff-45a7-bd55-20f18812dbde\",\n                \"add-to-cart\": \"/cart/add\"\n            }\n        },\n        {\n            \"id\": \"29abee69-c0a8-4a8d-ad2f-edb21503d68a\",\n            \"name\": \"Smartphone\",\n            \"price\": 211,\n            \"links\": {\n                \"self\": \"/products/29abee69-c0a8-4a8d-ad2f-edb21503d68a\",\n                \"add-to-cart\": \"/cart/add\"\n            }\n        },\n        {\n            \"id\": \"3668e3ff-b72e-4f74-8232-7dd59e6dc88e\",\n            \"name\": \"Smartphone\",\n            \"price\": 15,\n            \"links\": {\n                \"self\": \"/products/3668e3ff-b72e-4f74-8232-7dd59e6dc88e\",\n                \"add-to-cart\": \"/cart/add\"\n            }\n        },\n        {\n            \"id\": \"8778fe4c-87d7-4e79-a4df-bf0a23c63547\",\n            \"name\": \"Smartphone\",\n            \"price\": 543,\n            \"links\": {\n                \"self\": \"/products/8778fe4c-87d7-4e79-a4df-bf0a23c63547\",\n                \"add-to-cart\": \"/cart/add\"\n            }\n        },\n        {\n            \"id\": \"55dfe4c9-8af9-4568-aea4-8df5a53f47bd\",\n            \"name\": \"Smartphone\",\n            \"price\": 23,\n            \"links\": {\n                \"self\": \"/products/55dfe4c9-8af9-4568-aea4-8df5a53f47bd\",\n                \"add-to-cart\": \"/cart/add\"\n            }\n        },\n        {\n            \"id\": \"2cb8bd9a-3e88-454f-8b6f-2b25f63945fa\",\n            \"name\": \"Smartphone\",\n            \"price\": 650,\n            \"links\": {\n                \"self\": \"/products/2cb8bd9a-3e88-454f-8b6f-2b25f63945fa\",\n                \"add-to-cart\": \"/cart/add\"\n            }\n        },\n        {\n            \"id\": \"b57c88c2-c078-419a-a901-a68f69cded6f\",\n            \"name\": \"Smartphone\",\n            \"price\": 356,\n            \"links\": {\n                \"self\": \"/products/b57c88c2-c078-419a-a901-a68f69cded6f\",\n                \"add-to-cart\": \"/cart/add\"\n            }\n        },\n        {\n            \"id\": \"fca2f432-f3b3-4c7b-8974-f172e3120f11\",\n            \"name\": \"Smartphone\",\n            \"price\": 816,\n            \"links\": {\n                \"self\": \"/products/fca2f432-f3b3-4c7b-8974-f172e3120f11\",\n                \"add-to-cart\": \"/cart/add\"\n            }\n        },\n        {\n            \"id\": \"50de480f-0646-40ee-b401-6e4d1b27a0da\",\n            \"name\": \"Smartphone\",\n            \"price\": 49.99,\n            \"links\": {\n                \"self\": \"/products/50de480f-0646-40ee-b401-6e4d1b27a0da\",\n                \"add-to-cart\": \"/cart/add\"\n            }\n        },\n        {\n            \"id\": \"6ac2379d-a318-4977-a179-b00e4febcf43\",\n            \"name\": \"Smartphone\",\n            \"price\": 49.99,\n            \"links\": {\n                \"self\": \"/products/6ac2379d-a318-4977-a179-b00e4febcf43\",\n                \"add-to-cart\": \"/cart/add\"\n            }\n        }\n    ],\n    \"pagination\": {\n        \"page\": 4,\n        \"limit\": 10,\n        \"totalPage\": 5,\n        \"totalItems\": 49,\n        \"links\": {\n            \"self\": \"/products?page=4&limit=10\",\n            \"first\": \"/products?page=1&limit=10\",\n            \"last\": \"/products?page=5&limit=10\",\n            \"prev\": \"/products?page=3&limit=10\",\n            \"next\": \"/products?page=5&limit=10\"\n        }\n    }\n}"
+				},
+				{
+					"name": "500 Internal Server Error",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/products?priceMin=50&priceMax=100&sort=price&order=asc&page=2&limit=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "priceMin",
+									"value": "50"
+								},
+								{
+									"key": "priceMax",
+									"value": "100"
+								},
+								{
+									"key": "sort",
+									"value": "price"
+								},
+								{
+									"key": "order",
+									"value": "asc"
+								},
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Internal Server Error\",\n    \"errors\": [],\n    \"hints\": \"This is the server-related issue, please feel free to contact our technical team\",\n    \"trace_id\": \"23463426346\"\n}"
+				},
+				{
+					"name": "400 Bad Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/products?priceMin=50&priceMax=100&sort=price&order=asc&page=2&limitsssssssssss=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "priceMin",
+									"value": "50"
+								},
+								{
+									"key": "priceMax",
+									"value": "100"
+								},
+								{
+									"key": "sort",
+									"value": "price"
+								},
+								{
+									"key": "order",
+									"value": "asc"
+								},
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "limitsssssssssss",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Validation Error\",\n    \"errors\": [\n        {\n            \"query\": \"limitsssssssssss\",\n            \"message\": \"limitsssssssssss is valid\"\n        }\n    ],\n    \"hints\": \"The Query Params limitsssssssssss is not valid, please send the valid query params. If the problem is not resolved, please feel free to contact our technical team\",\n    \"trace_id\": \"23463426346\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get All Product Version 2",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const codes=[200,500,400]",
+							"const code=codes[Math.floor(Math.random()*codes.length)]",
+							"pm.variables.set(\"random_code\",code)",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-mock-response-code",
+						"value": "{{random_code}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url_v2}}/products?sort=name&order=desc&page=1&limit=5&fields=name,price,status",
+					"host": [
+						"{{base_url_v2}}"
+					],
+					"path": [
+						"products"
+					],
+					"query": [
+						{
+							"key": "sort",
+							"value": "name"
+						},
+						{
+							"key": "order",
+							"value": "desc"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "5"
+						},
+						{
+							"key": "fields",
+							"value": "name,price,status"
 						}
 					]
 				}
@@ -1657,13 +1458,13 @@
 			]
 		},
 		{
-			"name": "Update Product",
+			"name": "Update Product Or Create",
 			"request": {
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Smartphoneggggggg\",\n    \"description\": \"Description of the productggggg\",\n    \"price\": 50,\n    \"status\": \"DRAFT\"\n}",
+					"raw": "{\n    \"name\": \"Macbook Air 13inch\",\n    \"description\": \"Description of the product\",\n    \"price\": 80,\n    \"status\": \"PUBLISHED\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1682,12 +1483,255 @@
 					"variable": [
 						{
 							"key": "product_id",
-							"value": "{{product_id}}"
+							"value": "030e79c1-928d-47c2-bc68-4980f3e0b55e"
 						}
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "200 OK",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Smartphone\",\n    \"description\": \"Description of the product\",\n    \"price\": 49.99,\n    \"sku\": \"SMRTPHONE-05\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/products",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Product Updated Successfully\",\n    \"data\": {\n        \"id\": 123,\n        \"name\": \"Smartphone\",\n        \"description\": \"Description of the product.\",\n        \"price\": 49.99,\n        \"sku\": \"PRODUCT-05\",\n        \"links\": {\n            \"self\": \"/products\",\n            \"get_product\": \"/products/123\",\n            \"add_to_cart\": \"/addtocart\"\n        }\n    },\n    \"trace_id\": \"23463426346\"\n}"
+				},
+				{
+					"name": "201 Create Product",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Smartphone\",\n    \"description\": \"Description of the product\",\n    \"price\": 49.99,\n    \"sku\": \"SMRTPHONE-05\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/products",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Product Created Successfully\",\n    \"data\": {\n        \"id\": 123,\n        \"name\": \"Smartphone\",\n        \"description\": \"Description of the product.\",\n        \"price\": 49.99,\n        \"sku\": \"PRODUCT-05\",\n        \"links\": {\n            \"self\": \"/products/123\",\n            \"get_product\": \"/products/123\"\n        }\n    },\n    \"trace_id\": \"23463426346\"\n}"
+				},
+				{
+					"name": "401 Unauthorized",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Smartphone\",\n    \"description\": \"Description of the product\",\n    \"price\": 49.99,\n    \"sku\": \"SMRTPHONE-05\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/products",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Access Denied\",\n    \"errors\": [],\n    \"hints\": \"Please send the access token in the header as a Bearer Token. If the problem is not resolved, please feel free to contact our technical team\",\n    \"trace_id\": \"23463426346\"\n}"
+				},
+				{
+					"name": "400 Bad Request",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/products",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Validation Error\",\n    \"errors\": [\n        {\n            \"field\": \"name\",\n            \"message\": \"Name is required\"\n        },\n        {\n            \"field\": \"description\",\n            \"message\": \"Description is required\"\n        },\n        {\n            \"field\": \"price\",\n            \"message\": \"Price is required\"\n        },\n        {\n            \"field\": \"sku\",\n            \"message\": \"SKU is required\"\n        }\n    ],\n    \"hints\": \"Please send all the required payload. If the problem is not resolved, please feel free to contact our technical team\",\n    \"trace_id\": \"23463426346\"\n}"
+				},
+				{
+					"name": "500 Internal Server Error",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Smartphone\",\n    \"description\": \"Description of the product\",\n    \"price\": 49.99,\n    \"sku\": \"SMRTPHONE-05\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/products",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Internal Server Error\",\n    \"errors\": [],\n    \"hints\": \"This is the server-related issue, please feel free to contact our technical team\",\n    \"trace_id\": \"23463426346\"\n}"
+				},
+				{
+					"name": "404 Not Found",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/products/:product_id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products",
+								":product_id"
+							],
+							"variable": [
+								{
+									"key": "product_id",
+									"value": "111"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Product Not Found\",\n    \"errors\": [],\n    \"hints\": \"The product with ID 111 is currently unavailable. If the problem is not resolved, please feel free to contact our technical team\",\n    \"trace_id\": \"23463426346\"\n}"
+				}
+			]
 		}
 	],
 	"event": [
@@ -1727,6 +1771,11 @@
 		{
 			"key": "product_id",
 			"value": ""
+		},
+		{
+			"key": "base_url_v2",
+			"value": "http://localhost:4000/api/v2",
+			"type": "string"
 		}
 	]
 }

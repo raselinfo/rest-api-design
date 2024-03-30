@@ -1,5 +1,5 @@
-const prisma = require("../utils/prisma");
-const CustomError = require("../utils/Error");
+const prisma = require("../../utils/prisma");
+const CustomError = require("../../utils/Error");
 const createProductService = async ({
   name,
   price,

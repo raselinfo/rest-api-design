@@ -1,6 +1,6 @@
 const getProductService = require("../services/getProductService");
-const CustomError = require("../utils/Error");
-const generateEtag = require("../utils/generateEtag");
+const CustomError = require("../../utils/Error");
+const generateEtag = require("../../utils/generateEtag");
 
 const getProductController = async (req, res, next) => {
   try {
@@ -54,6 +54,7 @@ Here's a breakdown of what each part is doing: */
     // Generate ETag
     const ETag = generateEtag(product);
 
+    // Check if the ETag matches the one in the request headers
     if (req.headers["if-none-match"] === ETag) {
       console.log("[match etag]", ETag === req.headers["if-none-match"]);
       res.status(304).send("Not Modified");

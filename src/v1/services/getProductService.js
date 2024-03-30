@@ -1,4 +1,4 @@
-const prisma = require("../utils/prisma");
+const prisma = require("../../utils/prisma");
 
 const getProductService = async (id) => {
   const product = await prisma.product.findFirst({

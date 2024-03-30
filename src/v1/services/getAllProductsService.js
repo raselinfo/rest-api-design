@@ -1,7 +1,6 @@
-const prisma = require("../utils/prisma");
+const prisma = require("../../utils/prisma");
 
-const getAllProductsService = async (settings={}) => {
-  
+const getAllProductsService = async (settings = {}) => {
   // Todo: Get all published products from the database
   const products = await prisma.product.findMany(settings);
 

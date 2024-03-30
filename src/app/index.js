@@ -1,7 +1,8 @@
 const cors = require("cors");
 const errorMiddleware = require("../middlewares/error.middleware");
 const correlationMiddleware = require("../middlewares/correlationid.middleware");
-const productRoutes = require("../routes");
+const productRoutesV1 = require("../v1/routes");
+const productRoutesV2 = require("../v2/routes");
 const CustomError = require("../utils/Error");
 const express = require("express");
 const app = express();
@@ -24,7 +25,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(correlationMiddleware);
 
 // Routes
-app.use("/api/v1", productRoutes);
+app.use("/api/v1", productRoutesV1);
+app.use("/api/v2", productRoutesV2);
 
 app.get("/health", (_req, res) => {
   res.status(200).json({ message: "🚀 Catalog Service is up and running" });

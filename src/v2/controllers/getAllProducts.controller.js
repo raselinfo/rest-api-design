@@ -1,6 +1,6 @@
 const getAllProductsService = require("../services/getAllProductsService");
-const CustomError = require("../utils/Error");
-const queryValidation = require("../utils/queryValidation");
+const CustomError = require("../../utils/Error");
+const queryValidation = require("../../utils/queryValidation");
 const getAllProductsController = async (req, res, next) => {
   try {
     const query = req.query;
@@ -55,18 +55,14 @@ Here's a breakdown of what each part is doing: */
 
     const products = paginatedProducts.map((product) => {
       return {
-        ...product,
-        links: {
-          self: `/products/${product.id}`,
-          "add-to-cart": `/cart/add`,
-        },
+        ...product
       };
     });
 
     // Prepare response
     const response = {
       message: "Product Retrieval Successful",
-      data: products,
+      products: products,
       pagination: {
         page,
         limit,

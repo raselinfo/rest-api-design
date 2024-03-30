@@ -1,11 +1,11 @@
-const CustomError = require("../utils/Error");
+const CustomError = require("../../utils/Error");
 const deleteProductService = require("../services/deleteProductService");
 const { trace } = require("joi");
 
 const deleteProductController = async (req, res, next) => {
   try {
     const { id } = req.params;
-    if(!id){
+    if (!id) {
       const error = CustomError.badRequest({
         message: "Validation Error",
         errors: ["id is required"],
@@ -13,7 +13,6 @@ const deleteProductController = async (req, res, next) => {
       });
       return next(error);
     }
-
 
     const deleteProduct = await deleteProductService(id);
 
@@ -36,6 +35,5 @@ const deleteProductController = async (req, res, next) => {
     next(error);
   }
 };
-
 
 module.exports = deleteProductController;

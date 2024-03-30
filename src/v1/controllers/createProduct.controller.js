@@ -1,5 +1,5 @@
 const createProductService = require("../services/createProductService");
-const CustomError = require("../utils/Error");
+const CustomError = require("../../utils/Error");
 
 const joi = require("joi");
 

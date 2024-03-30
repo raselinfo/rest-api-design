@@ -1,5 +1,5 @@
 const joi = require("joi");
-const CustomError = require("../utils/Error");
+const CustomError = require("../../utils/Error");
 const createProductService = require("../services/createProductService");
 const updateProductService = require("../services/updateProductService");
 
@@ -47,7 +47,7 @@ const updateProductController = async (req, res, next) => {
     }
 
     // If product_id is provided, then update the product
-    console.log("Update product")
+    console.log("Update product");
 
     // Product validation check
     const schema = joi.object({
@@ -74,7 +74,7 @@ const updateProductController = async (req, res, next) => {
     return res.status(200).json({
       message: "Product Updated Successfully",
       data: {
-        ...updatedProduct,
+        id: updatedProduct.id,
         links: {
           self: `/products/${updatedProduct.id}`,
           get: `/products/${updatedProduct.id}`,
