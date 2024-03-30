@@ -4,7 +4,6 @@ const getProductService = async (id) => {
   const product = await prisma.product.findFirst({
     where: {
       id,
-      status: "PUBLISHED",
     },
   });
 

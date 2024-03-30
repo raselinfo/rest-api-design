@@ -16,6 +16,7 @@
             <div id="product_list"></div>
         </div>
 
+
     </section>
 
     <script>
@@ -25,7 +26,7 @@
 
 
         const getProducts = () => {
-            fetch(`http://localhost:4000/api/v1/products?sort=name&order=asc&page=4&limit=10&fields=name,price`)
+            fetch(`http://localhost:4000/api/v1/products?limit=10&fields=name,price`)
                 .then(res => {
                     console.log('Cache-Control headers', res.headers.get('Cache-Control'))
                     return res.json();

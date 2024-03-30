@@ -9,12 +9,21 @@
 </head>
 
 <body>
-    <div id="product_details">
+    <h1>Single Product</h1>
+    <div id="product_details"> </div>
+    <a href="./index.html">Home</a>
 
-    </div>
 
     <script>
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const params = Object.fromEntries(urlParams.entries());
+        const productId = params.id
+
         const getSingleProduct = async (productId) => {
+
+            const etag = sessionStorage.getItem("etag")
+
             const headers = {
                 ...(etag && { "If-None-Match": etag })
             }
@@ -24,19 +33,39 @@
             })
 
             if (response.status === 304) {
-                return response.json()
+                const data = JSON.parse(sessionStorage.getItem(`product`))
+                console.log("data", data)
+                renderDOM({
+                    name: data.name,
+                    price: data.price,
+                    description: data.description,
+                    status: data.status
+
+                })
+                console.log("Not Modified ")
+                return
+
             }
+            if (response.status === 200) {
+                const data = await response.json()
+                sessionStorage.setItem("etag", response.headers.get("Etag"))
+                sessionStorage.setItem(`product`, JSON.stringify(data.data))
+                renderDOM({
+                    name: data.data.name,
+                    price: data.data.price,
+                    description: data.data.description,
+                    status: data.data.status
+                })
+                console.log("Modified")
+            }
+        }
+        getSingleProduct(productId)
 
-            const data = await response.json()
-            console.log(data)
-
-
-            localStorage.setItem("etag", response.headers.get("Etag"))
-
-            product_details.innerHTML = `<h2>${data.data.name}</h2>
-                    <p>Price: ${data.data.price}</p>
-                    <p>Description: ${data.data.description}</p>
-                    <span>Status:  ${data.data.status} </span>`
+        const renderDOM = (data) => {
+            product_details.innerHTML = `<h2>${data.name}</h2>
+            <p>Price: ${data.price}</p>
+            <p>Description: ${data.description}</p>
+            <span>Status:  ${data.status} </span>`
         }
     </script>
 </body>

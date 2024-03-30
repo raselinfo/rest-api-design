@@ -1,7 +1,6 @@
 const getProductService = require("../services/getProductService");
 const CustomError = require("../utils/Error");
 const generateEtag = require("../utils/generateEtag");
-const etag = require("etag");
 
 const getProductController = async (req, res, next) => {
   try {
@@ -51,21 +50,16 @@ Here's a breakdown of what each part is doing: */
       product = filteredProduct;
     }
 
-    // const lastModified = new Date();
-    // Generate ETag
-    // Add Cache Control
-    // const ETag = generateEtag(product, lastModified);
-    const ETag = generateEtag(product)
 
-     console.log("match",req.headers["if-non-match"]);
+    // Generate ETag
+    const ETag = generateEtag(product);
 
     if (req.headers["if-none-match"] === ETag) {
-      console.log("match", ETag, req.headers["if-non-match"]);
+      console.log("[match etag]", ETag === req.headers["if-none-match"]);
       res.status(304).send("Not Modified");
       return;
     }
     // Add Cache Control
-    // res.setHeader("Cache-Control", "public,max-age=60");
     res.setHeader("Etag", ETag);
 
     console.log(`call from /products${id}`);

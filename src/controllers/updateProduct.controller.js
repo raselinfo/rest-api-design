@@ -4,7 +4,6 @@ const createProductService = require("../services/createProductService");
 const updateProductService = require("../services/updateProductService");
 
 const updateProductController = async (req, res, next) => {
-  console.log("Update Product Controller");
   try {
     const { id } = req.params;
     const product_id = id.trim();
@@ -12,6 +11,7 @@ const updateProductController = async (req, res, next) => {
     // If product_id is not provided, then create a new product
     if (!product_id) {
       console.log("Product ID is not provided, creating a new product");
+
       const schema = joi.object({
         name: joi.string().required(),
         description: joi.string().required(),
@@ -19,11 +19,9 @@ const updateProductController = async (req, res, next) => {
         sku: joi.string().required(),
         status: joi.string().optional(),
       });
-
       const validation = schema.validate(req.body);
 
       if (validation?.error) {
-        console.log(validation.error.details[0].message);
         const error = CustomError.badRequest({
           message: "Validation Error",
           errors: [validation.error.details[0].message],
@@ -48,7 +46,8 @@ const updateProductController = async (req, res, next) => {
       });
     }
 
-    // Todo: If product_id is provided, then update the product
+    // If product_id is provided, then update the product
+    console.log("Update product")
 
     // Product validation check
     const schema = joi.object({
@@ -63,7 +62,6 @@ const updateProductController = async (req, res, next) => {
     const validation = schema.validate({ ...req.body, id: product_id });
 
     if (validation?.error) {
-      console.log(validation.error.details[0].message);
       const error = CustomError.badRequest({
         message: "Validation Error",
         errors: [validation.error.details[0].message],
@@ -71,7 +69,6 @@ const updateProductController = async (req, res, next) => {
       });
       return next(error);
     }
-    console.log(validation);
     const updatedProduct = await updateProductService(id, validation.value);
 
     return res.status(200).json({
@@ -87,7 +84,6 @@ const updateProductController = async (req, res, next) => {
       },
       trace_id: req.headers["x-trace-id"],
     });
-
   } catch (error) {
     next(error);
   }
